@@ -134,7 +134,7 @@ const ProductPage = () => {
                 <h1 className="text-xl">Easy Learning</h1>
             </div>
             <div>
-                <h1 className="text-3xl font-bold">Class Shop</h1>
+                <h1 className="text-3xl font-bold">SHOP PAGE</h1>
             </div>
                 <div>
                 {email}
