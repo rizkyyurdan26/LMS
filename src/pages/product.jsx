@@ -4,6 +4,8 @@ import Button from "../components/Elements/Button/Button"
 import CardProduct from "../components/Fragment/CardProduct"
 import Counter from "../components/Fragment/Counter"
 import { getProducts } from "../services/product.service"
+import { getUsername } from "../services/auth.service"
+import { useLogin } from "../hooks/useLogin"
 
 // const products = [
 //     {
@@ -57,7 +59,7 @@ import { getProducts } from "../services/product.service"
 //     // },
 // ]
 
-const email = localStorage.getItem("email")
+
 
 const ProductPage = () => {
     const [cart,setCart] = useState([
@@ -67,18 +69,26 @@ const ProductPage = () => {
         // }
        
     ])
+
+    const username = useLogin()
     const [totalPrice, setTotalPrice] = useState(0)
     useEffect(() => {
         setCart(JSON.parse(localStorage.getItem("cart")) || [])
     },[])
 
+ 
+
     const [products,setProducts] = useState([])
+
+    
 
     useEffect(() => {
         getProducts((data) => {
             setProducts(data)
         })
     },[])
+
+    
 
     useEffect(() => {
        if (products.length > 0 && cart.length > 0) {
@@ -91,8 +101,7 @@ const ProductPage = () => {
     },[cart, products])
 
     const handleLogout = () => {
-        localStorage.removeItem("email")
-        localStorage.removeItem("password")
+        localStorage.removeItem("token")
         window.location.href = "/login"
     }
 
@@ -131,13 +140,13 @@ const ProductPage = () => {
             <div className="flex justify-center  items-center ">
             <div className="w-5/6 flex justify-between h-40  bg bg-blue-900 text-white px-20 items-center">
             <div>
-                <h1 className="text-xl">Easy Learning</h1>
+                <h1 className="text-xl">Easy Shop</h1>
             </div>
             <div>
                 <h1 className="text-3xl font-bold">SHOP PAGE</h1>
             </div>
                 <div>
-                {email}
+                {username}
                 <Button className="ml-5 bg-red-600" onClick={handleLogout}>Logout</Button></div>
             
                 </div>
@@ -146,7 +155,7 @@ const ProductPage = () => {
                 <div className=" w-full flex justify-center flex-wrap item-center py-10">
                 {products.length > 0 && products.map((product) =>(
                     <CardProduct key={product.id}>
-                    <CardProduct.Header image={product.image}></CardProduct.Header>
+                    <CardProduct.Header image={product.image} id = {product.id}></CardProduct.Header>
                     <CardProduct.Body name={product.title}>{product.description}</CardProduct.Body>
                     <CardProduct.Footer price={product.price} 
                     id ={product.id} handleAddToCart={handleAddToCart}>Add to cart</CardProduct.Footer>

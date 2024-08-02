@@ -17,8 +17,9 @@ const AuthLayouts = (props) => {
                 <h1 className='text-7xl font-bold mb-6 text-blue-600'>{title}</h1>
                 <p className='font-regular text-2xl text-black mb-8 '>
                 {isi}
-                <div style={{ borderBottom: '8px solid #3b82f6', width: '25%', marginBottom: '2rem', paddingTop: '0.2rem', paddingBottom: '0.5rem' }}></div>
                 </p>
+                <div style={{ borderBottom: '8px solid #3b82f6', width: '25%', marginBottom: '2rem', paddingTop: '0.2rem', paddingBottom: '0.5rem' }}></div>
+                
                 <div className="w-full">
                 {children}
                 {/* <Navigation type={type}></Navigation> */}
